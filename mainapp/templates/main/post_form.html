@@ -1,0 +1,5 @@
+{% extends 'form.html' %}
+
+{% block url %}{% url 'name:create' %}{% endblock %}
+
+{% block button %}{{ request.title }}{% endblock %}

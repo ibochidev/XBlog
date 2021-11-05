@@ -1,0 +1,5 @@
+{% extends 'form.html' %}
+
+{% block url %}{% url 'user:register' %}{% endblock %}
+
+{% block button %}{{ request.title }}{% endblock %}

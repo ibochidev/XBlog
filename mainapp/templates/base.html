@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'name:index' %}">PyFull</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#id-main-menu  ">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="id_main_menu">
+                <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'user:info' %}">{{ user.username }}</a>
+                    </li>
+                    {% if perms.main.add_post %}
+                 <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'name:create' %}">Post qo'shish</a>
+                    </li>
+                    {% endif %}
+                 <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'user:logout' %}">Chiqish</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item {% if url_name == 'user:register' %} active {% endif %}">
+                        <a class="nav-link"  href="{% url 'user:register' %}">Ro'yxatdan o'tish</a>
+                    </li>
+                    <li class="nav-item {% if url_name == 'user:login' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'user:login' %}">Tizimga kirish</a>
+                    </li>
+                {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container pt-3">
+    {% block content %}
+
+    {% endblock content%}
+</div>
+<script src="{% static 'vendor/jquery-3.6.0.js' %}"></script>
+</body>
+</html>
